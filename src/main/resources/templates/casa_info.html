@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+
+
+<body>
+        <nav th:replace="/fragments/nav :: nav"></nav>
+        <br>
+        <br>
+        <br>
+	<!-- Page Content -->
+	<div class="container">
+
+
+		<!-- Page Heading/Breadcrumbs -->
+		<h1 class="mt-4 mb-3">
+			HouseMax <small>Casas</small>
+		</h1>
+
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a th:href="@{/casa/listar-casas}">Home</a></li>
+			<li class="breadcrumb-item active">Casas</li>
+		</ol>
+
+		<!-- Blog Post -->
+		<div class="card mb-4">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-lg-6">
+						<a href="#"> <img class="img-fluid rounded"
+							th:src="${'/foto/casa/' + casa.id}" alt="">
+						</a>
+					</div>
+					<div class="col-lg-6">
+						<!--<form th:action="#" method="POST">-->
+<!--						<input type="hidden" th:value="${casa.id}" name="id">-->
+							<h2 class="card-title" th:text="'Familia: '+ ${casa.familia.nombre}"></h2>
+
+							<ul class="list-group">
+								<li class="list-group-item"><h5 th:text=" 'Precio: '+'$' +${casa.precio}  "></h5></li>
+								<li class="list-group-item">
+									<p th:text=" 'Fechas Disponibles: '+ ${casa.fechaDesde}+' al ' +${casa.fechaHasta} "></p>
+								</li>
+                                                             	<li class="list-group-item">
+									<p th:text=" 'Domicilio: '+ ${casa.calle}+' '+${casa.numero}"></p>
+								</li>
+                                                                <li class="list-group-item">
+									<p th:text=" 'Lugar: '+ ${casa.ciudad}+' '+${casa.pais}"></p>
+								</li>
+                                                                <li class="list-group-item">
+									<p th:text=" 'CP: '+ ${casa.codPostal}"></p>
+								</li>
+                                                                <li class="list-group-item">
+									<p th:text=" 'Min-Max/Días: '+ ${casa.minDias}+'/'+${casa.maxDias}"></p>
+								</li>
+                                                                <li class="list-group-item">
+									<p th:text=" 'Tipo de Vivienda: '+ ${casa.tipoVivienda}"></p>
+								</li>
+							</ul>
+
+
+							<button type="submit" class="btn btn-success">Reservar
+								</button>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	 /.container 
+
+	
+
+</body>
+
+</html>

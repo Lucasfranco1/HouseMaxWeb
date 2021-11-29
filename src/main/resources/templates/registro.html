@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head"></head>
+<body>
+	<nav th:replace="/fragments/nav :: nav"></nav>
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<img alt="First slide" class="d-block w-100" src="/img/home.jpg">
+			<div class="carousel-caption d-none d-md-block">
+				
+				<br>
+					
+				<div class="container" style="margin: 0; padding: 0; margin-bottom: -150px; width: 100%; margin-left: 50px;">
+					<div class="row">
+						<div class="col-log-6 col-md6 col-sm-6 container card" style="background-color:rgba(22, 2, 2, 0.741);">
+							<h1 class="text-center" style="color: #fff;">Registrarse</h1>
+							<div class="card-body">
+								<form th:action="@{/registro}" method="POST" enctype="multipart/form-data">
+                                                                    <div class="form-group">
+										<label for="alias" style="color: #fff; display: flex; justify-content: left;">Alias :</label>
+										<input id="alias" type="text" name="alias" class="form-control" placeholder="Digite su alias" >
+									</div>  
+                                                                    <div class="form-group">
+										<label for="email" style="color: #fff; display: flex; justify-content: left;">Email :</label>
+										<input id="email" type="email" name="email" class="form-control" placeholder="Digite el email" >
+									</div> 
+                                                                    <div class="form-group">
+										<label for="password" style="color: #fff; display: flex; justify-content: left;">Contraseña :</label>
+										<input id="password" type="password" name="clave" class="form-control" placeholder="Digite la contraseña" >
+										<span id="spani"><i class="fa fa-eye" id="eye" aria-hidden="true" onclick="toggle()"></i>
+										</span>										
+									</div>		
+                                                                         <div class="form-group">
+										<label for="file" style="color: #fff; display: flex; justify-content: left;">Foto :</label>
+										<input id="file" type="file" name="archivo" class="form-control" >
+									</div>                    
+																																
+									<div class="box-footer">
+                                                                            <button  type="submit" id="btnsubmit" style="background-color: rgba(69, 5, 220, 0.775);" class="boton cuatro mt-sm-1" ><span style="color: #fff;">Registrar</span> </button>
+                                                                            <span style="font-size: 15px"> Si estás registrado <a th:href="@{/login}" style="font-size: 10px">Iniciar sesión aquí</a></span>
+									</div>
+								
+									
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			 
+			</div>
+		</div>
+		
+	<script>
+		var state=false;
+		function toggle(){
+			if(state){
+				document.getElementById("password").setAttribute("type", "password");
+					state=false;
+				document.getElementById("eye").style.color='#7a797e';
+				
+			}else{
+				document.getElementById("password").setAttribute("type", "text");
+					state=true;
+					document.getElementById("eye").style.color='#5887ef';
+			}
+		}
+	</script>	
+	
+	
+</body>
+</html>

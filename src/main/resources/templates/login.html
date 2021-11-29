@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head"></head>
+<body>
+	
+    <nav th:replace="/fragments/nav :: nav"></nav>
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<img alt="First slide" class="d-block w-100" src="/img/home.jpg">
+			<div class="carousel-caption d-none d-md-block">
+				
+				<br>
+					
+				<div class="container" style="margin: 0; padding: 0; margin-top: 100px; width: 100%; margin-left: 50px;">
+					<div class="row">
+						<div class="col-log-6 col-md6 col-sm-6 container card" style="background-color:rgba(22, 2, 2, 0.741);">
+							<h1 class="text-center" style="color: #fff; margin-bottom: -20px">Iniciar Sesión</h1>
+							<div class="card-body">
+								<form action="/logincheck" method="POST">
+                                                                     <p th:if="${error != null}" th:text="${error}" style="color:red; font-size:  11px; margin-bottom: -12px"></p>
+                                                                     <p th:if="${logout != null}" th:text="${logout}" style="color:green; font-size: 11px;margin-bottom: -12px"></p>
+                                                                     
+									<div class="form-group">
+										<label for="email" style="color: #fff; display: flex; justify-content: left;">Email :</label>
+										<input id="email" type="email" class="form-control" name="username" placeholder="Digite el mail" >
+									</div>                                                                           
+									<div class="form-group">
+										<label for="password" style="color: #fff; display: flex; justify-content: left;">Contraseña :</label>
+										<input id="password" type="password" class="form-control" name="password" placeholder="Digite la contraseña" >
+										<span id="spani2"><i class="fa fa-eye" id="eye" aria-hidden="true" onclick="toggle()"></i>
+										</span>										
+									</div>                                                                                          
+									<div class="box-footer">
+										<button type="submit" style="background-color: rgba(69, 5, 220, 0.775);" class="boton cuatro mt-sm-1" ><span style="color: #fff;">Iniciar Sesión</span> </button>
+                                                                                
+									</div>
+                                                                     <span style="font-size: 15px" > Si no estás registrado <a th:href="@{/registro}"type="btn btn-link" style="font-size: 10px">Registrarte aquí</a></span>
+<!--                                    <div class="form-group" style="display: flex; justify-content: center;">
+                                        <button type="button" th:href="@{/registro}" class="btn btn-link" >¿Cómo puedo Registrarme?</button>   
+                                        <button type="button" class="btn btn-link" >Olvidé mi contraseña</button>                                  																								                               																								
+                                    </div>  -->
+								
+									
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			 
+			</div>
+		</div>
+		
+	<script>
+		var state=false;
+		function toggle(){
+			if(state){
+				document.getElementById("password").setAttribute("type", "password");
+					state=false;
+				document.getElementById("eye").style.color='#7a797e';
+				
+			}else{
+				document.getElementById("password").setAttribute("type", "text");
+					state=true;
+					document.getElementById("eye").style.color='#5887ef';
+			}
+		}
+	</script>	
+	
+	
+</body>
+</html>

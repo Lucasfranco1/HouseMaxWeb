@@ -1,0 +1,19 @@
+<header class="masthead text-center text-white">
+    <div class="masthead-content">
+        <div class="container" style="margin-bottom: -200px">
+        <h1  masthead-heading mb-0>HouseMax</h1>
+        <h2 class="masthead-subheading mb-0" th:if="${session.usuariosession != null}" th:text="${session.usuariosession.alias}+', ¿cómo estás?'" style="color: #000"></h2>        
+        <a th:href="@{/usuario/editar-perfil(id=__${session.usuariosession.id}__)}" th:if="${session.usuariosession != null}"class="btn btn-primary btn-xl rounded-pill mt-5">Ver Perfil</a>
+        <a th:href="@{/familia/editar-perfil}" class="btn btn-primary btn-xl rounded-pill mt-5">Darme de Alta como Familia</a>
+         <!--<a th:href="@{/casa/cargar}" class="btn btn-primary btn-xl rounded-pill mt-5">Dar de alta una casa</a>-->
+        <a th:href="@{/cliente/editar-perfil(id=__${session.usuariosession.id}__)}" th:if="${session.usuariosession != null}"class="btn btn-primary btn-xl rounded-pill mt-5">Darme de Alta como Cliente</a>
+        <a th:href="@{/usuario/listar-usuarios(id=__${session.usuariosession.id}__)}" th:if="${session.usuariosession != null}"class="btn btn-primary btn-xl rounded-pill mt-5">Listar Usuarios</a>       
+       <a href="/registro" th:if="${session.usuariosession == null}"class="btn btn-primary btn-xl rounded-pill mt-5">¡Registrate!</a>
+
+      </div>
+    </div>
+    <div class="bg-circle-1 bg-circle"></div>
+    <div class="bg-circle-2 bg-circle"></div>
+    <div class="bg-circle-3 bg-circle"></div>
+    <div class="bg-circle-4 bg-circle"></div>
+  </header>

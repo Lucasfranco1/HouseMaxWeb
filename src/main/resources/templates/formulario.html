@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="/fragments/head :: head"></head>
+    <body>
+        <nav th:replace="/fragments/nav :: nav"></nav>
+        <br>
+        <br>
+        <br>    
+
+        <div class="carousel-inner" >
+            <div class="carousel-item active" >
+                <img alt="First slide" class="d-block w-100" th:src="${'/foto/familia/' + perfil.id}" style="margin-top: 150px; max-width: 400px;max-height: 500px;margin-left: 750px; border-radius: 100%" >
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="col-lg-6 order-lg-2">
+                           
+                            <div class="p-5">
+                                <img th:if="${perfil.foto != null}" class="img-fluid rounded-circle" th:src="${'/foto/familia/' + perfil.id}" alt="">
+                                    <img th:if="${perfil.foto == null}" class="img-fluid rounded-circle" src="img/family.jpg" alt="">
+                                        </div>
+                                        </div>
+                                       
+                                            
+                                            <h1 style="margin-top: 80px; text-align: center; color: rgba(69, 5, 220, 0.775)"><span th:text="${action}"></span> Familia</h2>
+                                            
+                                                <div class="container" style="margin: 0; padding: 0; margin-bottom: -250px; width: 100%; margin-left: -260px;">
+                                                    <div class="row">
+                                                        <div class="col-log-6 col-md6 col-sm-6 container card" style="background-color:rgba(22, 2, 2, 0.741);">
+<!--                                                            <h1 class="text-center" style="color: #fff;">Registro de Familia</h1>-->
+                                                            <div class="card-body">
+                                                                <form method="POST" enctype="multipart/form-data">
+                                                                    <p th:if="${error != null}" th:text="${error}"></p>
+                                                                    <!--                                                <label>Usuario</label>
+                                                                                                                    <select class="form-control" name="idUsuario"> 
+                                                                                                                        <option selected disabled>Usuario: </option> 
+                                                                                                                        <option th:each="usuario : ${usuarios}" th:value="${usuario.id}"></option>
+                                                                                                                    </select>-->
+                                                                    <input type="hidden" name="id" th:value="${perfil.id}">
+                                                                        <div class="form-group">
+                                                                            <label for="nombre" style="color: #fff; display: flex; justify-content: left;">Apellido :</label>
+                                                                            <input id="nombre" th:value="${perfil.nombre}" type="text" name="nombre" th:disabled="${action== 'Eliminar'}" class="form-control" placeholder="Digite el apellido de la familia" >
+                                                                        </div>                         
+                                                                        <div class="form-group">
+                                                                            <label for="edadMin" style="color: #fff; display: flex; justify-content: left;">Edad Mínima :</label>
+                                                                            <input id="edadMin" th:value="${perfil.edadMin}" type="number" name="edadMin" th:disabled="${action== 'Eliminar'}" class="form-control" placeholder="Digite la edad mínima de sus hijos">																			
+                                                                        </div>	
+                                                                        <div class="form-group">
+                                                                            <label for="edadMax" style="color: #fff; display: flex; justify-content: left;">Edad Máxima :</label>
+                                                                            <input id="edadMax" th:value="${perfil.edadMax}" type="number" name="edadMax" th:disabled="${action== 'Eliminar'}" class="form-control" placeholder="Digite la edad máxima de sus hijos">																			
+                                                                        </div>		
+                                                                        <div class="form-group">
+                                                                            <label for="numHijos" style="color: #fff; display: flex; justify-content: left;">N° Hijos/as :</label>
+                                                                            <input id="numHijos" th:value="${perfil.numHijos}" type="number" name="numHijos" th:disabled="${action== 'Eliminar'}" class="form-control" placeholder="Digite cuántos hijos/as tienes">																			
+                                                                        </div>	
+                                                                        <div class="form-group">
+                                                                            <label for="email" style="color: #fff; display: flex; justify-content: left;">Email :</label>
+                                                                            <input id="email" th:value="${perfil.email}" type="email" name="email" th:disabled="${action== 'Eliminar'}" class="form-control" placeholder="Digite el email de la familia">																			
+                                                                        </div>
+                                                                        <label th:if="${action!= 'Eliminar'}">Foto</label>
+                                                                        <input type="file" class="form-control" name="archivo" th:if="${action!= 'Eliminar'}" />
+                                                                        <div class="box-footer">
+                                                                            <button th:if="${action=='Crear'}" type="submit" id="btnsubmit" style="background-color: rgba(69, 5, 220, 0.775);" class="boton cuatro mt-sm-1" formaction="/familia/actualizar-perfil" formmethod="POST" ><span style="color: #fff;">Crear</span> </button>                                                                                                                                                   
+                                                                            <button th:if="${action=='Actualizar'}" type="submit" id="btnsubmit" style="background-color: rgba(69, 5, 220, 0.775);" class="boton cuatro mt-sm-1" formaction="/familia/actualizar-perfil" formmethod ="POST" ><span style="color: #fff;">Actualizar</span> </button>                                                                                                                                                    
+                                                                            <button th:if="${action=='Eliminar'}" type="submit" id="btnsubmit" style="background-color: rgba(69, 5, 220, 0.775);" class="boton cuatro mt-sm-1" formaction="/familia/eliminar-perfil" formmethod="POST" ><span style="color: #fff;">Eliminar</span> </button>
+                                                                      
+                                                                        </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                </div>
+                                                </div>
+
+
+
+
+                                                </body>
+                                                </html>

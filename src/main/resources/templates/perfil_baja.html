@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!-- Head -->
+<head th:replace="/fragments/head :: head"></head>
+<body>
+<!-- Navigation -->
+<nav th:replace="/fragments/nav :: nav"></nav>
+<!-- Header -->
+<header th:replace="/fragments/headergenerico :: header"></header>
+                                            <section>
+                                                <div class="container" style="margin-top: 200px">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-lg-6 order-lg-2">
+                                                            <div class="p-5">
+                                                                <img th:if="${perfil.foto != null}" class="img-fluid rounded-circle" th:src="${'/foto/usuario/' + perfil.id}" alt="">
+                                                                <img th:if="${perfil.foto == null}" class="img-fluid rounded-circle" src="img/m1.jpeg" alt="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 order-lg-1">
+                                                            <div class="p-5">
+                                                                <h2 class="display-4">Actualiza tu perfil</h2>
+                                                                <form action="/usuario/baja{id}" method="POST" enctype="multipart/form-data">
+
+                                                                    
+                                                                    <p th:if="${error != null}" th:text="${error}" style="color:red;"></p>
+                                                            
+                                                                    <input type="hidden" name="id" th:value="${perfil.id}"/>
+                                                                    
+                                                                    <label>Nombre</label>
+                                                                    <input type="text" class="form-control" name="alias" th:value="${perfil.alias}" th:disabled="${usuario.alias}"/>                                                                    
+
+                                                                    <label>E-Mail</label>
+                                                                    <input type="email" class="form-control" name="email" th:value="${perfil.email}"/>
+
+                                                                    <label>Foto</label>
+                                                                    <input type="file" class="form-control" name="archivo" th:value="${perfil.foto}" />
+                                                                    
+                                                                    <label>Contraseña</label>
+                                                                    <input type="password" class="form-control" name="clave" th:value="${clave}"/>
+                                                                    
+
+                                                                    <br/>                                                                                                                                                                                                                       
+                                                                            <button th:if="${action=='Actualizar'}" type="submit" id="btnsubmit" style="background-color: rgba(69, 5, 220, 0.775);" class="boton cuatro mt-sm-1" formaction="/usuario/actualizar-perfil" formmethod ="POST" ><span style="color: #fff;">Actualizar Perfil</span> </button>                                                                                                                                                    
+                                                                            <button th:if="${action=='Eliminar'}" type="submit" id="btnsubmit" style="background-color: rgba(69, 5, 220, 0.775);" class="boton cuatro mt-sm-1" formaction="/usuario/baja" formmethod="POST" ><span style="color: #fff;">Dar de Baja</span> </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+
+
+                                            <!-- Footer -->
+                                            <footer class="py-5 bg-black">
+                                                <div class="container">
+                                                    <p class="m-0 text-center text-white small">Copyright &copy; Your Website 2019</p>
+                                                </div>
+                                                <!-- /.container -->
+                                            </footer>
+
+ <!-- Bootstrap core JavaScript -->
+ <script th:replace="/fragments/bootsjs :: script"></script>
+
+
+                                        </body>
+
+                                        </html>

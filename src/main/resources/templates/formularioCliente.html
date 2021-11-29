@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="/fragments/head :: head"></head>
+    <body>
+        <nav th:replace="/fragments/nav :: nav"></nav>
+        <br>
+        <br>
+        <br>    
+
+        <div class="carousel-inner" >
+            <div class="carousel-item active" >
+                <img alt="First slide" class="d-block w-100" th:src="${'/foto/cliente/' + perfil.id}" style="margin-top: 150px; max-width: 400px;max-height: 500px;margin-left: 750px; border-radius: 100%" >
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="col-lg-6 order-lg-2">
+                           
+                            <div class="p-5">
+                                <img th:if="${perfil.foto != null}" class="img-fluid rounded-circle" th:src="${'/foto/cliente/' + perfil.id}" alt="">
+                                    <img th:if="${perfil.foto == null}" class="img-fluid rounded-circle" src="img/family.jpg" alt="">
+                                        </div>
+                                        </div>
+                                       
+                                            
+                                            <h1 style="margin-top: -10px; text-align: center; color: rgba(69, 5, 220, 0.775)"><span th:text="${action}"></span> Cliente</h2>
+                                            
+                                                <div class="container" style="margin: 0; padding: 0; margin-top: auto; margin-bottom: -384px; width: 100%; margin-left: -50px;">
+                                                    <div class="row">
+                                                        <div class="col-log-6 col-md6 col-sm-6 container card" style="background-color:rgba(22, 2, 2, 0.741);">
+<!--                                                            <h1 class="text-center" style="color: #fff;">Registro de Familia</h1>-->
+                                                            <div class="card-body">
+                                                                <form method="POST" enctype="multipart/form-data">
+                                                                    <p th:if="${error != null}" th:text="${error}"></p>
+                                                                    <!--                                                <label>Usuario</label>
+                                                                                                                    <select class="form-control" name="idUsuario"> 
+                                                                                                                        <option selected disabled>Usuario: </option> 
+                                                                                                                        <option th:each="usuario : ${usuarios}" th:value="${usuario.id}"></option>
+                                                                                                                    </select>-->
+                                                                    <input type="hidden" name="id" th:value="${perfil.id}">
+                                                                        <div class="form-group">
+                                                                            <label for="nombre" style="color: #fff; display: flex; justify-content: left;">Nombre :</label>
+                                                                            <input id="nombre" th:value="${perfil.nombre}" type="text" name="nombre" th:disabled="${action== 'Eliminar'}" class="form-control" placeholder="Digite el nombre" >
+                                                                        </div>                         
+                                                                        <div class="form-group">
+                                                                            <label for="calle" style="color: #fff; display: flex; justify-content: left;">Calle :</label>
+                                                                            <input id="calle" th:value="${perfil.calle}" type="text" name="calle" th:disabled="${action== 'Eliminar'}" class="form-control" placeholder="Digite la calle de su dirección">																			
+                                                                        </div>	
+                                                                        <div class="form-group">
+                                                                            <label for="num" style="color: #fff; display: flex; justify-content: left;">N° :</label>
+                                                                            <input id="num" th:value="${perfil.numero}" type="number" name="numero" th:disabled="${action== 'Eliminar'}" class="form-control" placeholder="Digite el número">																			
+                                                                        </div>		
+                                                                        <div class="form-group">
+                                                                            <label for="codPostal" style="color: #fff; display: flex; justify-content: left;">CP :</label>
+                                                                            <input id="codPostal" th:value="${perfil.codPostal}" type="text" name="codPostal" th:disabled="${action== 'Eliminar'}" class="form-control" placeholder="Digite el código postal">																			
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="ciudad" style="color: #fff; display: flex; justify-content: left;">Ciudad :</label>
+                                                                            <input id="ciudad" th:value="${perfil.ciudad}" type="text" name="ciudad" th:disabled="${action== 'Eliminar'}" class="form-control" placeholder="Digite la ciudad en la que vive">																			
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="pais" style="color: #fff; display: flex; justify-content: left;">País :</label>
+                                                                            <input id="pais" th:value="${perfil.pais}" type="text" name="pais" th:disabled="${action== 'Eliminar'}" class="form-control" placeholder="Digite el país en el que vive">																			
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="email" style="color: #fff; display: flex; justify-content: left;">Email :</label>
+                                                                            <input id="email" th:value="${perfil.email}" type="email" name="email" th:disabled="${action== 'Eliminar'}" class="form-control" placeholder="Digite el email">																			
+                                                                        </div>
+                                                                        <label th:if="${action!= 'Eliminar'}">Foto</label>
+                                                                        <input type="file" class="form-control" name="archivo" th:if="${action!= 'Eliminar'}" />
+                                                                        <div class="box-footer">
+                                                                            <button th:if="${action=='Crear'}" type="submit" id="btnsubmit" style="background-color: rgba(69, 5, 220, 0.775);" class="boton cuatro mt-sm-1" formaction="/familia/actualizar-perfil" formmethod="POST" ><span style="color: #fff;">Crear</span> </button>                                                                                                                                                   
+                                                                            <button th:if="${action=='Actualizar'}" type="submit" id="btnsubmit" style="background-color: rgba(69, 5, 220, 0.775);" class="boton cuatro mt-sm-1" formaction="/familia/actualizar-perfil" formmethod ="POST" ><span style="color: #fff;">Actualizar</span> </button>                                                                                                                                                    
+                                                                            <button th:if="${action=='Eliminar'}" type="submit" id="btnsubmit" style="background-color: rgba(69, 5, 220, 0.775);" class="boton cuatro mt-sm-1" formaction="/familia/eliminar-perfil" formmethod="POST" ><span style="color: #fff;">Eliminar</span> </button>
+                                                                      
+                                                                        </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                </div>
+                                                </div>
+            <br>
+                <br>
+
+
+
+                                                </body>
+                                                </html>
