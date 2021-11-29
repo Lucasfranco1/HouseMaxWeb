@@ -11,6 +11,7 @@ import com.estanciasestrajeroweb.sistema.entidades.Usuario;
 import com.estanciasestrajeroweb.sistema.enumeraciones.TipoUsuario;
 import com.estanciasestrajeroweb.sistema.excepciones.ErrorService;
 import com.estanciasestrajeroweb.sistema.repositorios.ClienteRepositorio;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -142,5 +143,9 @@ public class ClienteServicio {
             throw new ErrorService("No se encontró el id.");
         }
     }
+    @Transactional(readOnly = true)
+    public List<Cliente> listarClientes(String id){
+        return ClR.buscarClientePorUsuario(id);
+    } 
 
 }

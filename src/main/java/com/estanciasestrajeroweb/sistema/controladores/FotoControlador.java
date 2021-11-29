@@ -6,10 +6,12 @@
 package com.estanciasestrajeroweb.sistema.controladores;
 
 import com.estanciasestrajeroweb.sistema.entidades.Casa;
+import com.estanciasestrajeroweb.sistema.entidades.Cliente;
 import com.estanciasestrajeroweb.sistema.entidades.Familia;
 import com.estanciasestrajeroweb.sistema.entidades.Usuario;
 import com.estanciasestrajeroweb.sistema.excepciones.ErrorService;
 import com.estanciasestrajeroweb.sistema.servicios.CasaServicio;
+import com.estanciasestrajeroweb.sistema.servicios.ClienteServicio;
 import com.estanciasestrajeroweb.sistema.servicios.FamiliaServicio;
 import com.estanciasestrajeroweb.sistema.servicios.UsuarioServicio;
 import java.util.logging.Level;
@@ -36,8 +38,11 @@ public class FotoControlador {
     private UsuarioServicio usuarioServicio;
     @Autowired
     private FamiliaServicio famS;
-     @Autowired
+    @Autowired
     private CasaServicio cS;
+    
+    @Autowired
+    private ClienteServicio clienteS;
 
     @GetMapping("/usuario/{id}")
     public ResponseEntity<byte[]> fotoUsuario(@PathVariable String id) {
@@ -48,6 +53,26 @@ public class FotoControlador {
                 throw new ErrorService("El usuario no tiene una foto asignada.");
             }
             byte[] foto = usuario.getFoto().getContenido();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+
+            return new ResponseEntity<>(foto, headers, HttpStatus.OK);
+        } catch (ErrorService ex) {
+            Logger.getLogger(FotoControlador.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+    }
+     @GetMapping("/cliente/{id}")
+    public ResponseEntity<byte[]> fotoCliente(@PathVariable String id) {
+
+        try {
+            Cliente cliente = clienteS.buscarClientePorId(id);
+            if (cliente.getFoto() == null) {
+                throw new ErrorService("El cliente no tiene una foto asignada.");
+            }
+            byte[] foto = cliente.getFoto().getContenido();
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_JPEG);

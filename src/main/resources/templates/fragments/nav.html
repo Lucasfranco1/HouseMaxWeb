@@ -7,7 +7,7 @@
                     <a class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/familia/mi-familia}"th:if="${session.usuariosession != null}">Mi Familia</a>
+                    <a class="nav-link" th:href="@{/familia/mi-familia}"th:if="${session.usuariosession != null && session.usuariosession.tipoUsuario.name()=='FAMILIA'}">Mi Familia</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/registro}"th:if="${session.usuariosession == null}">Registrarme</a>
@@ -16,13 +16,16 @@
                     <a class="nav-link" href="/login" th:if="${session.usuariosession == null}">Iniciar Sesión</a>
                 </li>
                  <li class="nav-item">
-                    <a class="nav-link" th:href="@{/casa/listar}" th:if="${session.usuariosession != null}">Ver Casa</a>
+                    <a class="nav-link" th:href="@{/casa/listar}" th:if="${session.usuariosession!=null&& session.usuariosession.tipoUsuario.name()=='FAMILIA'}" >Ver Casa</a>
                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link" th:href="@{/cliente/listarClientes}" th:if="${session.usuariosession!=null&& session.usuariosession.tipoUsuario.name()=='CLIENTE'}" >Cliente</a>
+                </li>               
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/usuario/editar-perfil(id=__${session.usuariosession.id}__)}" th:if="${session.usuariosession != null}">Editar Perfil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/usuario/ajustes-perfil(id=__${session.usuariosession.id}__)}" th:if="${session.usuariosession != null}">Ajustes</a>
+                    <a class="nav-link" th:href="@{/usuario/ajustes-perfil(id=__${session.usuariosession.id}__)}" th:if="${session.usuariosession != null&& session.usuariosession.tipoUsuario.name()=='FAMILIA'}">Ajustes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout" th:if="${session.usuariosession != null}">Salir</a>

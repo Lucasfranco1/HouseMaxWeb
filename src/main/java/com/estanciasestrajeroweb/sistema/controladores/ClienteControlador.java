@@ -60,7 +60,7 @@ public class ClienteControlador {
                cliente = cS.buscarClientePorId(id);
                
            } catch (ErrorService ex) {
-               Logger.getLogger(FamiliaControlador.class.getName()).log(Level.SEVERE, null, ex);
+               Logger.getLogger(ClienteControlador.class.getName()).log(Level.SEVERE, null, ex);
            }            
         }
         modelo.put("perfil", cliente);
@@ -70,7 +70,7 @@ public class ClienteControlador {
 
     }
 
-    @PostMapping("/actualizar-perfil")
+    @PostMapping("/cargar-perfil")
     public String cargarFamilia(ModelMap modelo, HttpSession session, MultipartFile archivo,
             @RequestParam(required = false) String nombre,
             @RequestParam(required = false) String calle,
@@ -132,10 +132,10 @@ public class ClienteControlador {
             return "redirect:/inicio";
         }
 
-        List<Familia>todos=famS.listarFamiliasPorUsuario(login.getId());
-        model.addAttribute("familias", todos);
+        List<Cliente>todos=cS.listarClientes(login.getId());
+        model.addAttribute("clientes", todos);
         
-        return "carga_familia.html";
+        return "carga_cliente.html";
         
                 
     }

@@ -22,7 +22,7 @@ public class PortalController {
     @Autowired
     private UsuarioServicio uS;
     
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO', 'ROLE_FAMILIA')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO', 'ROLE_FAMILIA', 'ROLE_CLIENTE')")
     @GetMapping("/inicio")
     public String inicio() {
         return "inicio.html";

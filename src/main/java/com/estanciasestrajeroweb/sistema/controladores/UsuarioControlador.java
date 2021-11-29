@@ -51,7 +51,7 @@ public class UsuarioControlador {
         return "redirect:/familia/registrar";
                 
     }
-    @PreAuthorize("hasAnyRole('ROLE_USUARIO','ROLE_FAMILIA')")
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO','ROLE_FAMILIA', 'ROLE_CLIENTE')")
     @GetMapping("/editar-perfil")
     public String editarPerfil(HttpSession session, @RequestParam String id, ModelMap model, @RequestParam(required = false) String action) {
         if(action==null){
@@ -73,7 +73,7 @@ public class UsuarioControlador {
         return "perfil.html";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_USUARIO','ROLE_FAMILIA')")
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO','ROLE_FAMILIA', 'ROLE_CLIENTE')")
     @PostMapping("/actualizar-perfil")
     public String registrar(ModelMap modelo, HttpSession session, MultipartFile archivo, @RequestParam String id, @RequestParam String alias, @RequestParam String email, @RequestParam String clave) {
 
@@ -98,7 +98,7 @@ public class UsuarioControlador {
         }
 
     }
-    @PreAuthorize("hasAnyRole('ROLE_USUARIO','ROLE_FAMILIA')")
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO','ROLE_FAMILIA', 'ROLE_CLIENTE')")
     @GetMapping("/listar-usuarios")
     public String ListarUsuarios(HttpSession session, @RequestParam String id, ModelMap model) {
         
@@ -118,7 +118,7 @@ public class UsuarioControlador {
         return "carga_usuarios";
                 
     }
-    @PreAuthorize("hasAnyRole('ROLE_USUARIO','ROLE_FAMILIA')")
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO','ROLE_FAMILIA', 'ROLE_CLIENTE')")
     @GetMapping("/ajustes-perfil")
     public String ajustesdeUsuarios(HttpSession session, @RequestParam String id, ModelMap model){
     Usuario login = (Usuario) session.getAttribute("usuariosession");
