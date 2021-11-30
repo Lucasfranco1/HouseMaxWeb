@@ -6,6 +6,7 @@
 package com.estanciasestrajeroweb.sistema.servicios;
 
 import com.estanciasestrajeroweb.sistema.entidades.Cliente;
+import com.estanciasestrajeroweb.sistema.entidades.Familia;
 import com.estanciasestrajeroweb.sistema.entidades.Foto;
 import com.estanciasestrajeroweb.sistema.entidades.Usuario;
 import com.estanciasestrajeroweb.sistema.enumeraciones.TipoUsuario;
@@ -101,7 +102,7 @@ public class ClienteServicio {
             ClR.save(cliente);
         }
     }
-
+    @Transactional
     public void eliminarCliente(String id) throws ErrorService {
         Optional<Cliente> cliente = ClR.findById(id);
         if (cliente.isPresent()) {
@@ -109,6 +110,18 @@ public class ClienteServicio {
         } else {
             throw new ErrorService("Error al eliminar cliente");
         }
+    }
+    @Transactional 
+    public void eliminar(String idUsuario, String idCliente) throws ErrorService{
+        Optional<Cliente> respuesta=ClR.findById(idCliente);
+        if(respuesta.isPresent()){
+            Cliente cliente=respuesta.get();
+             if(cliente.getUsuario().getId().equals(idUsuario)){                 
+                 ClR.deleteById(idCliente);
+             }
+        }else{
+            throw new ErrorService("No exite el id solicitado.");
+        }     
     }
 
     private void validar(String nombre, String calle, Integer numero, String codPostal, String ciudad, String pais, String email) throws ErrorService {

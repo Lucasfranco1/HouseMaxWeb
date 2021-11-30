@@ -161,6 +161,7 @@ public class FamiliaServicio {
     public Familia traerFamiliasPorUsuario(String id){
         return fR.buscarFamiliaUsuario(id);
     }
+    @Transactional
     public void eliminar(String idUsuario, String idFamilia) throws ErrorService{
         Optional<Familia> respuesta=fR.findById(idFamilia);
         if(respuesta.isPresent()){

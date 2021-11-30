@@ -20,7 +20,10 @@
                 </li>
                  <li class="nav-item">
                     <a class="nav-link" th:href="@{/cliente/listarClientes}" th:if="${session.usuariosession!=null&& session.usuariosession.tipoUsuario.name()=='CLIENTE'}" >Cliente</a>
-                </li>               
+                </li>    
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/cliente/listar-casas}" th:if="${session.usuariosession!=null&& session.usuariosession.tipoUsuario.name()=='CLIENTE'}" >Ver Estancias</a>
+                </li>  
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/usuario/editar-perfil(id=__${session.usuariosession.id}__)}" th:if="${session.usuariosession != null}">Editar Perfil</a>
                 </li>

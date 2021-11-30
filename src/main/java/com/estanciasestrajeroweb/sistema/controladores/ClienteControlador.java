@@ -5,10 +5,12 @@
  */
 package com.estanciasestrajeroweb.sistema.controladores;
 
+import com.estanciasestrajeroweb.sistema.entidades.Casa;
 import com.estanciasestrajeroweb.sistema.entidades.Cliente;
 import com.estanciasestrajeroweb.sistema.entidades.Familia;
 import com.estanciasestrajeroweb.sistema.entidades.Usuario;
 import com.estanciasestrajeroweb.sistema.excepciones.ErrorService;
+import com.estanciasestrajeroweb.sistema.servicios.CasaServicio;
 import com.estanciasestrajeroweb.sistema.servicios.ClienteServicio;
 import com.estanciasestrajeroweb.sistema.servicios.FamiliaServicio;
 import com.estanciasestrajeroweb.sistema.servicios.UsuarioServicio;
@@ -21,6 +23,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,6 +42,9 @@ public class ClienteControlador {
     
     @Autowired 
     private FamiliaServicio famS;
+    
+    @Autowired
+    private CasaServicio caS;
     
     
     
@@ -139,17 +145,53 @@ public class ClienteControlador {
         
                 
     }
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO','ROLE_CLIENTE')")
     @PostMapping("/eliminar-perfil")
     public String eliminar(HttpSession session, @RequestParam String id){
         try {
             Usuario login = (Usuario) session.getAttribute("usuariosession");
-            famS.eliminar(login.getId(),id);
+            cS.eliminar(login.getId(),id);
             
         } catch (ErrorService ex) {
-            Logger.getLogger(FamiliaControlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "redirect:/familia/mi-familia";
+        return "redirect:/cliente/listarClientes";
     }
-    
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO','ROLE_CLIENTE')")
+    @GetMapping("/listar-casas")
+    public String ListarCasa(HttpSession session, ModelMap model) {
+
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+        if (login == null) {
+            return "redirect:/inicio";
+        }
+        try {
+            
+            List<Casa> todos = caS.listarCasasPorImagenes();
+            model.addAttribute("casas", todos);
+
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+        }
+        return "home";
+
+    }
+   
+    @GetMapping("/casa-infor/{id}")
+    public String Casainfo(HttpSession session, ModelMap model, @PathVariable String id) throws ErrorService {
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+        if (login == null) {
+            return "redirect:/inicio";
+        }
+        
+        Casa c = caS.buscarCasaPorId(id);
+        if (c != null) {
+            model.addAttribute("casa", c);
+            return "casa_info";
+        } else {
+            return "redirect:/casa/listar-casas";
+        }
+
+    }
     
 }

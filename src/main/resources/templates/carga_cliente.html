@@ -9,7 +9,7 @@
     <br>
         <h2 style="text-align: center">HouseMax</h2>
     <br>
-        <a class="btn btn-outline-success" th:href="@{/casa/cargar}" style="margin-left: 1100px">Ver Reservas</a>
+        <a class="btn btn-outline-success" th:href="@{/cliente/listar-casas}" style="margin-left: 1100px">Ver Reservas</a>
     <div class="container">
         <div class="col-row">
             <table class="table table-striped table-striped">
@@ -43,7 +43,7 @@
                     <td th:text="${cliente.email}"></td>
                     <td>
                         <a th:href="@{/cliente/editar-perfil(id=__${cliente.id}__,action=Actualizar)}">Editar</a> -
-                        <a th:href="@{/cliente/editar-perfil(id=__${cliente.id}__,action=Eliminar)}">Eliminar</a> -
+                        <a th:href="@{/cliente/editar-perfil(id=__${cliente.id}__,action=Eliminar)}">Eliminar</a> 
                         
                     </td>
                   </tr>

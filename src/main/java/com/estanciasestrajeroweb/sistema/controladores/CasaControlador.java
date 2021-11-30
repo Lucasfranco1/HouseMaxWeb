@@ -268,7 +268,7 @@ public class CasaControlador {
 
     }
     
-    @PreAuthorize("hasAnyRole('ROLE_USUARIO','ROLE_FAMILIA')")
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO','ROLE_CLIENTE')")
     @GetMapping("/casa-info/{id}")
     public String Casainfo(HttpSession session, ModelMap model, @PathVariable String id) throws ErrorService {
         Usuario login = (Usuario) session.getAttribute("usuariosession");
